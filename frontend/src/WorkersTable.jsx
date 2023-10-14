@@ -7,6 +7,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
+import PopOverActions from "./components/PopOverActions";
 
 export default function WorkersTable() {
   const workers = [
@@ -38,7 +39,9 @@ export default function WorkersTable() {
               <Td>{worker.area}</Td>
               <Td>{worker.projects.join(", ")}</Td>
               <Td>{worker.status}</Td>
-              <Td> | </Td>
+              <Td>
+                <PopOverActions />
+              </Td>
             </Tr>
           ))}
         </Tbody>
