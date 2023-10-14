@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   ButtonGroup,
@@ -13,6 +14,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
 
 export default function PopOverActions() {
+  const navigate = useNavigate();
   const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
@@ -31,7 +33,11 @@ export default function PopOverActions() {
       <PopoverContent sx={{ width: "auto" }}>
         <PopoverArrow />
         <ButtonGroup display="flex" flexDirection="column" gap={0}>
-          <Button variant="ghost" leftIcon={<Icon as={MdOutlineEdit} />}>
+          <Button
+            variant="ghost"
+            leftIcon={<Icon as={MdOutlineEdit} />}
+            onClick={() => navigate("/detail")}
+          >
             Editar
           </Button>
           <Button variant="ghost" leftIcon={<Icon as={RiDeleteBin6Line} />}>

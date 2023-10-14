@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { customTheme } from "./assets/reset";
 import WorkersTable from "./WorkersTable";
 import MainLayout from "./components/layout/MainLayout";
+import WorkerDetail from "./WorkerDetail";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/trabajadores",
         element: <WorkersTable />,
+      },
+      {
+        path: "/detail",
+        element: <WorkerDetail />,
       },
     ],
   },
