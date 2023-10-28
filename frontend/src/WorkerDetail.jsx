@@ -1,22 +1,20 @@
 import {
-  FormControl,
-  FormLabel,
-  Input,
   Box,
   Card,
-  CardHeader,
   CardBody,
-  Select,
-  UnorderedList,
+  CardHeader,
+  Divider,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
   ListItem,
+  Select,
+  SimpleGrid,
   Text,
   Textarea,
-  Heading,
-  Divider,
-  Flex,
-} from "@chakra-ui/react";
-import TagsInput from "./components/TagsInput";
-import TagsInputWithInput from "./components/TagsInputWithInput";
+  UnorderedList,
+} from '@chakra-ui/react'
 
 const worker = {
   name: "Inés",
