@@ -94,7 +94,7 @@ export default function WorkerDetail() {
   } = worker;
 
   return (
-    <Card>
+    <Card variant="outline">
       <CardHeader display="flex" gap={1} alignItems="baseline">
         <Heading size="md">
           {name} {lastName}
