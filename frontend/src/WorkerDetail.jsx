@@ -13,39 +13,69 @@ import {
   Textarea,
   Heading,
   Divider,
+  Flex,
 } from "@chakra-ui/react";
-import MultiSelectTags from "./components/MultiSelectTags";
+import TagsInput from "./components/TagsInput";
+import TagsInputWithInput from "./components/TagsInputWithInput";
 
 const worker = {
   name: "Inés",
   lastName: "Pedraza",
-  area: "Dev",
+  area: "dev",
   seniority: "Mid",
-  active_projects: ["SO69"],
-  past_projects: ["PTY_Betonline", "Flexicar", "GMV_HSP"],
+  activeProjects: [
+    { id: "so69", value: "SO69", label: "Summer" },
+    { id: "1", value: "1", label: "uno" },
+  ],
+  pastProjects: [
+    { id: "ptyB", value: "ptyBetonline", label: "PTY Betonline" },
+    { id: "flexicar", value: "flexicar", label: "Flexicar" },
+    { id: "gmvHSP", value: "gmvHSP", label: "HSP" },
+  ],
   status: "OK",
-  interests: ["videogames"],
+  interests: [{ id: "videogames", value: "videogames", label: "Videogames" }],
   preferences: { workingAlone: false },
-  hard_skills: {
-    react: "midLevel",
-    nodejs: "basicLevel",
-    angular: "basicLevel",
+  hardSkills: {
+    react: "mid",
+    nodejs: "junior",
+    angular: "juniorpro",
   },
-  soft_skills: { english: "proLevel", teamSpirit: "high" },
-  internal_notes: ["Llora mucho pero se la quiere"],
+  softSkills: { english: "pro", teamWork: "pro", client: "low" },
+  internalNotes: ["Llora mucho pero se la quiere"],
   history: ["Psicologa y RRHH", "Viene de consultora con Angular"],
 };
 
-const hardSkills = [
+const hardSkillsList = [
   { react: ["junior", "juniorpro", "mid", "midpro", "senior", "seniorpro"] },
   { nodejs: ["junior", "juniorpro", "mid", "midpro", "senior", "seniorpro"] },
   { angular: ["junior", "juniorpro", "mid", "midpro", "senior", "seniorpro"] },
 ];
 
-const softSkills = [
+const softSkillsList = [
   { english: ["low", "mid", "pro"] },
   { teamWork: ["low", "mid", "pro"] },
   { client: ["low", "mid", "pro"] },
+];
+
+const allActiveProjects = [
+  { id: "so69", value: "SO69", label: "Summer" },
+  { id: "1", value: "1", label: "uno" },
+  { id: "2", value: "2", label: "dos" },
+  { id: "3", value: "3", label: "tres" },
+  { id: "4", value: "4", label: "cuatro" },
+  { id: "5", value: "5", label: "cinco" },
+  { id: "6", value: "6", label: "seis" },
+  { id: "7", value: "7", label: "siete" },
+];
+const allPastProjects = [
+  { id: "so69", value: "SO69", label: "Summer" },
+  { id: "1", value: "1", label: "uno" },
+  { id: "2", value: "2", label: "dos" },
+  { id: "3", value: "3", label: "tres" },
+  { id: "4", value: "4", label: "cuatro" },
+  { id: "5", value: "5", label: "cinco" },
+  { id: "6", value: "6", label: "seis" },
+  { id: "7", value: "7", label: "siete" },
 ];
 
 export default function WorkerDetail() {
@@ -55,15 +85,16 @@ export default function WorkerDetail() {
     area,
     seniority,
     status,
-    active_projects,
-    past_projects,
+    activeProjects,
+    pastProjects,
     interests,
     preferences,
-    hard_skills,
-    soft_skills,
-    internal_notes,
+    hardSkills,
+    softSkills,
+    internalNotes,
     history,
   } = worker;
+
   return (
     <Card>
       <CardHeader display="flex" gap={1} alignItems="baseline">
@@ -74,47 +105,76 @@ export default function WorkerDetail() {
       </CardHeader>
 
       <CardBody display="flex" flexDirection="column" gap={8}>
-        <Box display="flex">
-          <FormControl>
+        <Flex gap="4">
+          <FormControl xs={12}>
             <FormLabel>Nombre</FormLabel>
-            <Input type="text" defaultValue={name} />
+            <Input
+              type="text"
+              defaultValue={name}
+              onChange={(e) => console.log(e)}
+            />
           </FormControl>
           <FormControl>
             <FormLabel>Apellido</FormLabel>
-            <Input type="text" defaultValue={lastName} />
+            <Input
+              type="text"
+              defaultValue={lastName}
+              onChange={(e) => console.log(e)}
+            />
           </FormControl>
           <FormControl>
-            <FormLabel>Estado</FormLabel>
-            <Select>
-              <option>Ok</option>
-              <option>NotOk</option>
+            <FormLabel htmlFor="status">Estado</FormLabel>
+            <Select id="status" value={status} onChange={(e) => console.log(e)}>
+              <option value="ok">Ok</option>
+              <option value="not">NotOk</option>
             </Select>
           </FormControl>
-        </Box>
+        </Flex>
 
-        <Box display="flex">
+        <Flex gap="4">
           <FormControl>
-            <FormLabel>Disciplina</FormLabel>
-            <Input type="text" defaultValue={area} />
+            <FormLabel htmlFor="area">Disciplina</FormLabel>
+            <Select id="area" value={area} onChange={(e) => console.log(e)}>
+              <option value="dev">Dev</option>
+              <option value="maq">Maq</option>
+              <option value="ui">UI</option>
+              <option value="ux">UX</option>
+              <option value="ges">Ges</option>
+            </Select>
           </FormControl>
           <FormControl>
-            <FormLabel>Seniority</FormLabel>
-            <Input type="text" defaultValue={seniority} />
+            <FormLabel htmlFor="seniority">Seniority</FormLabel>
+            <Select
+              id="seniority"
+              value={seniority}
+              onChange={(e) => console.log(e)}
+            >
+              <option value="dev">Junior</option>
+              <option value="dev">Junior pro</option>
+              <option value="maq">Mid</option>
+              <option value="maq">Mid pro</option>
+              <option value="maq">Senior</option>
+              <option value="maq">Senior pro</option>
+            </Select>
           </FormControl>
-        </Box>
+        </Flex>
 
         <Divider />
 
         <Box display="flex" gap={4}>
-          <MultiSelectTags
+          <TagsInput
+            tags={allActiveProjects}
+            selectedTags={activeProjects}
             label="Proyectos activos"
             idLabel="activeProjects"
-            options={active_projects}
+            onChange={(e) => console.log(e)}
           />
-          <MultiSelectTags
+          <TagsInput
+            tags={allPastProjects}
+            selectedTags={pastProjects}
             label="Proyectos pasados"
             idLabel="pastProjects"
-            options={past_projects}
+            onChange={(e) => console.log(e)}
           />
         </Box>
 
@@ -123,13 +183,17 @@ export default function WorkerDetail() {
         <Box display="flex" gap={4}>
           <Box flexGrow={1}>
             <Text>Habilidades técnicas</Text>
-            {hardSkills.map((hardSkill) => {
+            {hardSkillsList.map((hardSkill) => {
               const skill = Object.keys(hardSkill)[0];
               const levels = hardSkill[skill];
               return (
                 <FormControl key={skill}>
-                  <FormLabel>{skill}</FormLabel>
-                  <Select>
+                  <FormLabel htmlFor={skill}>{skill}</FormLabel>
+                  <Select
+                    id={skill}
+                    value={hardSkills[skill]}
+                    onChange={(e) => console.log(e)}
+                  >
                     {levels.map((level) => (
                       <option key={level}>{level}</option>
                     ))}
@@ -141,13 +205,17 @@ export default function WorkerDetail() {
 
           <Box flexGrow={1}>
             <Text>Habilidades no-técnicas</Text>
-            {softSkills.map((softSkill) => {
+            {softSkillsList.map((softSkill) => {
               const skill = Object.keys(softSkill)[0];
               const levels = softSkill[skill];
               return (
                 <FormControl key={skill}>
-                  <FormLabel>{skill}</FormLabel>
-                  <Select>
+                  <FormLabel htmlFor={skill}>{skill}</FormLabel>
+                  <Select
+                    id={skill}
+                    value={softSkills[skill]}
+                    onChange={(e) => console.log(e)}
+                  >
                     {levels.map((level) => (
                       <option key={level}>{level}</option>
                     ))}
@@ -161,21 +229,23 @@ export default function WorkerDetail() {
         <Divider />
 
         <Box display="flex">
-          <FormControl>
-            <FormLabel>Intereses</FormLabel>
-            {/* <Input type="text"> */}
-            <UnorderedList>
-              {interests.map((interest) => (
-                <ListItem textAlign="justify" key={interest}>
-                  {interest}
-                </ListItem>
-              ))}
-            </UnorderedList>
-            {/* </Input> */}
-          </FormControl>
-          <FormControl>
+          <TagsInputWithInput
+            label="Intereses"
+            idLabel="interests"
+            tags={interests}
+            suggestions={allPastProjects}
+            onAddTag={console.log}
+            onRemoveTag={console.log}
+          />
+          {/* <TagsInput
+            label="Intereses"
+            idLabel="interests"
+            options={interests}
+          /> */}
+
+          {/* <FormControl>
             <FormLabel>Preferencias</FormLabel>
-            {/* <Input type="text"> */}
+            <Input type="text">
             <UnorderedList>
               {Object.keys(preferences).map((preference) => (
                 <ListItem textAlign="justify" key={preference}>
@@ -183,20 +253,20 @@ export default function WorkerDetail() {
                 </ListItem>
               ))}
             </UnorderedList>
-            {/* </Input> */}
-          </FormControl>
+            </Input>
+          </FormControl> */}
         </Box>
 
         <Divider />
 
         <FormControl>
-          <FormLabel>Notas</FormLabel>
-          <Textarea placeholder="Here is a sample placeholder" />
+          {/* <FormLabel>Notas</FormLabel>
+          <Textarea placeholder="Here is a sample placeholder" /> */}
         </FormControl>
 
         <Divider />
 
-        <FormControl>
+        {/* <FormControl>
           <FormLabel>Historia</FormLabel>
           <UnorderedList>
             {history.map((story) => (
@@ -205,7 +275,7 @@ export default function WorkerDetail() {
               </ListItem>
             ))}
           </UnorderedList>
-        </FormControl>
+        </FormControl> */}
       </CardBody>
     </Card>
   );
