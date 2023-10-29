@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Card,
   CardBody,
@@ -93,11 +94,11 @@ export default function WorkerDetail() {
 
   return (
     <Card variant="outline">
-      <CardHeader display="flex" gap={1} alignItems="baseline">
+      <CardHeader display="flex" gap={2} alignItems="center">
         <Heading size="md">
           {name} {lastName}
         </Heading>
-        <Box as="span">{status}</Box>
+        <Badge colorScheme={status == 'OK' ? 'green' : 'red'}>{status}</Badge>
       </CardHeader>
       <CardBody>
         {/* 2 cols on mobile, 3 cols on desktop */}
@@ -196,7 +197,7 @@ export default function WorkerDetail() {
           </Box>
         </SimpleGrid>
         <Divider />
-        {/* TODO: Refactor layout */}
+        {/* TODO: @ines Refactor layout */}
         <Box display="flex" flexDirection="column" gap={8}>
           <Box display="flex">
             <TagsInputWithInput

@@ -1,22 +1,15 @@
-import { Outlet } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
-import Main from "./Main";
+import { Outlet } from 'react-router-dom'
+import Main from './Main'
 
 export default function MainLayout() {
   return (
+    // TODO: @ines make semantic html layout with header, main, footer
     <>
       <header>Soy el header</header>
 
-      <Box
-        sx={{
-          display: { lg: "flex" },
-          minHeight: { lg: 1 },
-        }}
-      >
-        <Main>
-          <Outlet />
-        </Main>
-      </Box>
+      <Main>
+        <Outlet />
+      </Main>
     </>
-  );
+  )
 }
